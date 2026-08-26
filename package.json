@@ -1,7 +1,7 @@
 {
   "name": "@zucchinifi/dapp-sdk",
   "version": "0.2.0-alpha.1",
-  "description": "Typed integration SDK for the Zucchini Zcash wallet",
+  "description": "Typed Zcash, EVM, and Solana integration SDK for Zucchini Wallet",
   "type": "module",
   "files": ["dist", "README.md", "LICENSE-APACHE", "LICENSE-MIT"],
   "exports": {
@@ -13,7 +13,13 @@
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc --noEmit -p tsconfig.json",
-    "test": "node --test"
+    "test": "pnpm build && node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@solana/wallet-standard-features": "1.4.0",
+    "@wallet-standard/app": "1.1.1",
+    "@wallet-standard/base": "1.1.1",
+    "@wallet-standard/features": "1.1.1"
   },
   "devDependencies": {
     "typescript": "5.9.2"
@@ -28,4 +34,3 @@
     "url": "git+https://github.com/zucchini-wallet/dapp-sdk.git"
   }
 }
-
