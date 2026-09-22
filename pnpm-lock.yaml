@@ -20,6 +20,9 @@ importers:
       '@wallet-standard/features':
         specifier: 1.1.1
         version: 1.1.1
+      '@zucchinifi/merchant-payments':
+        specifier: file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz
+        version: file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz
     devDependencies:
       typescript:
         specifier: 5.9.2
@@ -43,6 +46,11 @@ packages:
     resolution: {integrity: sha512-aCWYmVeSCGViyEU5k7GMoW8zxE4Gs+C1s1Pp2XLesvSNlnZ4PMES9HUnTB3hl0b3RVj7C61yze3IWyrncqg4MA==}
     engines: {node: '>=22'}
 
+  '@zucchinifi/merchant-payments@file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz':
+    resolution: {integrity: sha512-t+5cnpFZVzaaeVzTyzCG9LpFkJIMmq2J4fG3v/XysezoWTlzH7QTS8jGgX6oA4a0WqSDElnfSOe2q/0sArWKcg==, tarball: file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz}
+    version: 0.1.0-alpha.1
+    engines: {node: '>=22.19'}
+
   typescript@5.9.2:
     resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
     engines: {node: '>=14.17'}
@@ -64,5 +72,7 @@ snapshots:
   '@wallet-standard/features@1.1.1':
     dependencies:
       '@wallet-standard/base': 1.1.1
+
+  '@zucchinifi/merchant-payments@file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz': {}
 
   typescript@5.9.2: {}

@@ -3,11 +3,24 @@
   "version": "0.2.0-alpha.1",
   "description": "Typed Zcash, EVM, and Solana integration SDK for Zucchini Wallet",
   "type": "module",
-  "files": ["dist", "README.md", "LICENSE-APACHE", "LICENSE-MIT"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE-APACHE",
+    "LICENSE-MIT"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./merchant": {
+      "types": "./dist/merchant.d.ts",
+      "import": "./dist/merchant.js"
+    },
+    "./merchant/server": {
+      "types": "./dist/merchant-server.d.ts",
+      "import": "./dist/merchant-server.js"
     }
   },
   "scripts": {
@@ -19,7 +32,8 @@
     "@solana/wallet-standard-features": "1.4.0",
     "@wallet-standard/app": "1.1.1",
     "@wallet-standard/base": "1.1.1",
-    "@wallet-standard/features": "1.1.1"
+    "@wallet-standard/features": "1.1.1",
+    "@zucchinifi/merchant-payments": "file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz"
   },
   "devDependencies": {
     "typescript": "5.9.2"

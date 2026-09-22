@@ -12,7 +12,20 @@ Framework-independent TypeScript SDK for integrating applications with Zucchini 
 - ZIP 321 parsing and formatting.
 - Compatibility fixtures and integration examples.
 
-The SDK never handles wallet seeds, signing keys, wallet databases, or transaction proving.
+The browser SDK never handles wallet seeds, spending keys, wallet databases, or transaction proving.
+
+## Merchant payment protocol proposal
+
+The [open merchant-payment implementation](docs/merchant-payments/README.md)
+provides independent registry and signed ZIP 321 invoice verification. The browser
+entry point is `@zucchinifi/dapp-sdk/merchant`; backend signing helpers are at
+`@zucchinifi/dapp-sdk/merchant/server`. Both are experimental and unpublished.
+Merchant signing uses a separate invoice key, never a wallet spending key.
+
+The browser client explicitly negotiates support, requests a wallet challenge,
+and submits a signed invoice once. It never retries a payment or downgrades to an
+unsigned request. Wallet approval and recovery support must exist before a wallet
+advertises the capability. The current extension does not advertise it yet.
 
 ## EVM discovery
 
