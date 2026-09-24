@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@zucchinifi/merchant-payments': file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz
+
 importers:
 
   .:

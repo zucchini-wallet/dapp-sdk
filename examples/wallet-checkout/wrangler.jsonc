@@ -1,0 +1,12 @@
+{
+ "account_id":"8373a65f287688d5c159f137c86c6655",
+ "name":"zucchini-merchant-checkout-testing",
+ "main":"worker.mjs",
+ "compatibility_date":"2026-09-22",
+ "workers_dev":false,
+ "preview_urls":false,
+ "routes":[{"pattern":"zucchinifi.xyz/merchant-test*","zone_name":"zucchinifi.xyz"}],
+ "assets":{"directory":"./public","binding":"ASSETS","run_worker_first":true},
+ "durable_objects":{"bindings":[{"name":"ORDERS","class_name":"CheckoutOrder"}]},
+ "migrations":[{"tag":"v1","new_sqlite_classes":["CheckoutOrder"]}]
+}

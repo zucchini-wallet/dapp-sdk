@@ -17,6 +17,13 @@ const object = (v: unknown): v is Record<string, unknown> => !!v && typeof v ===
 function bad(message: string): never { throw new Error(message); }
 export function createMerchantPaymentClient(provider: MerchantPaymentProvider) {
   return {
+    /** Call from checkout after connection. Backend must derive price/recipient from its order. */
+    async checkout(network: Network, createInvoice: (challenge: MerchantChallenge) => Promise<string>): Promise<MerchantPaymentResult> {
+      const challenge = await this.challenge(network);
+      const invoice = await createInvoice(challenge);
+      if (challenge.expiresAt <= Math.floor(Date.now() / 1000)) bad('Checkout expired before payment approval. Start checkout again. No payment was requested.');
+      return this.requestPayment(invoice);
+    },
     async capabilities(): Promise<MerchantCapabilities> {
       const value = await provider.request({ method: 'zcash_getMerchantPaymentCapabilities' });
       if (!object(value) || !Array.isArray(value.versions) || !value.versions.includes(1) ||

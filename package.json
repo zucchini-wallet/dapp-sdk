@@ -7,7 +7,8 @@
     "dist",
     "README.md",
     "LICENSE-APACHE",
-    "LICENSE-MIT"
+    "LICENSE-MIT",
+    "docs"
   ],
   "exports": {
     ".": {
@@ -21,19 +22,33 @@
     "./merchant/server": {
       "types": "./dist/merchant-server.d.ts",
       "import": "./dist/merchant-server.js"
+    },
+    "./zcash": {
+      "types": "./dist/zcash.d.ts",
+      "import": "./dist/zcash.js"
+    },
+    "./evm": {
+      "types": "./dist/evm.d.ts",
+      "import": "./dist/evm.js"
+    },
+    "./solana": {
+      "types": "./dist/solana.d.ts",
+      "import": "./dist/solana.js"
     }
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "check": "tsc --noEmit -p tsconfig.json",
-    "test": "pnpm build && node --test tests/*.test.mjs"
+    "test": "pnpm build && node --test tests/*.test.mjs",
+    "verify:package": "pnpm build && node scripts/verify-package.mjs",
+    "prepublishOnly": "pnpm check && pnpm test && pnpm verify:package"
   },
   "dependencies": {
     "@solana/wallet-standard-features": "1.4.0",
     "@wallet-standard/app": "1.1.1",
     "@wallet-standard/base": "1.1.1",
     "@wallet-standard/features": "1.1.1",
-    "@zucchinifi/merchant-payments": "file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz"
+    "@zucchinifi/merchant-payments": "0.1.0-alpha.1"
   },
   "devDependencies": {
     "typescript": "5.9.2"
@@ -46,5 +61,17 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/zucchini-wallet/dapp-sdk.git"
+  },
+  "pnpm": {
+    "overrides": {
+      "@zucchinifi/merchant-payments": "file:vendor/zucchinifi-merchant-payments-0.1.0-alpha.1-0b69276.tgz"
+    }
+  },
+  "bundledDependencies": [
+    "@zucchinifi/merchant-payments"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "tag": "next"
   }
 }

@@ -39,3 +39,23 @@ test('malformed success response requires wallet activity check, never retries',
  await assert.rejects(client.requestPayment('e30.e30.AA'), /check wallet activity/);
  assert.equal(calls, 1);
 });
+test('checkout obtains a fresh challenge and submits once; slow backend cannot submit expired challenge', async () => {
+ const original = globalThis.window;
+ const clock = Date.now;
+ let now = 1790100000000;
+ Date.now = () => now;
+ globalThis.window = { location: { protocol: 'https:', origin: 'https://shop.example.com' } };
+ try {
+  const calls = [];
+  const client = createMerchantPaymentClient({ async request(r) {
+   calls.push(r.method);
+   if (r.method === 'zcash_createMerchantPaymentChallenge') return { challenge: Buffer.alloc(32, 7).toString('base64url'), origin: window.location.origin, network: 'testnet', expiresAt: now / 1000 + 300 };
+   return { txid: 'a'.repeat(64), invoiceDigest: 'b'.repeat(43) };
+  }});
+  await client.checkout('testnet', async challenge => { assert.equal(challenge.origin, window.location.origin); return 'e30.e30.AA'; });
+  assert.deepEqual(calls, ['zcash_createMerchantPaymentChallenge', 'zcash_requestMerchantPayment']);
+  calls.length = 0;
+  await assert.rejects(client.checkout('testnet', async () => { now += 301000; return 'e30.e30.AA'; }), /expired/);
+  assert.deepEqual(calls, ['zcash_createMerchantPaymentChallenge']);
+ } finally { Date.now = clock; if (original === undefined) delete globalThis.window; else globalThis.window = original; }
+});

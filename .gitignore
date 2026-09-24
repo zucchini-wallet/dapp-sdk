@@ -6,3 +6,9 @@ coverage/
 !.env.example
 .DS_Store
 
+
+receipt-scanner/target/
+receipt-scanner/local/
+*.viewing-key
+
+__pycache__/
