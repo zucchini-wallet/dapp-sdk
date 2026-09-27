@@ -1,6 +1,6 @@
 {
   "name": "@zucchinifi/dapp-sdk",
-  "version": "0.2.0-alpha.1",
+  "version": "0.2.0",
   "description": "Typed Zcash, EVM, and Solana integration SDK for Zucchini Wallet",
   "type": "module",
   "files": [
@@ -8,7 +8,8 @@
     "README.md",
     "LICENSE-APACHE",
     "LICENSE-MIT",
-    "docs"
+    "docs",
+    "CHANGELOG.md"
   ],
   "exports": {
     ".": {
@@ -72,6 +73,6 @@
   ],
   "publishConfig": {
     "access": "public",
-    "tag": "next"
+    "tag": "latest"
   }
 }

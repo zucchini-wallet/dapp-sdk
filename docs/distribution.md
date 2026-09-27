@@ -1,8 +1,11 @@
 # Distribution and compatibility
 
-The 0.2 prerelease is published as `@zucchinifi/dapp-sdk@next`. The existing
-`latest` 0.1.7 release stays unchanged. Pin the full prerelease version in production
-applications; npm's normal semver range does not opt users into prereleases.
+Version 0.2.0 is the stable SDK release, published under `latest`. It contains
+breaking changes from 0.1.7. Existing integrations must follow the migration
+notes below; applications that cannot migrate can pin `@zucchinifi/dapp-sdk@0.1.7`.
+The `/merchant` and `/merchant/server` APIs remain experimental independently of
+the stable ordinary connection/payment API. Production Wallet 0.5.2 does not
+support signed merchant payments.
 
 | Entry | Intended consumer | Wallet support |
 | --- | --- | --- |
@@ -20,6 +23,25 @@ or a merchant registration service. The scanner is a separate optional deploymen
 from this repository, owned by the merchant and scoped by its incoming viewing key.
 
 ## Migrating from the legacy 0.1.x package
+
+| 0.1.7 interface | 0.2.0 migration |
+| --- | --- |
+| `ZucchiniSDK`, singleton `zucchini`, configuration / `apiUrl` | Discover the injected provider and create a client; no hosted API client is supplied |
+| CommonJS `require()` | Use ESM `import`; no CommonJS export is provided |
+| `connect(['send_transaction'])` | `client.connect({permissions: ['send_transaction']})` |
+| `sendTransaction({to, amount, memo})` returning a string | `requestTransaction({recipient, amountZatoshis, memo})` returning `{txid}`; amount is bigint zatoshis |
+| `getNetwork()` returning `{network: 'main' / 'test'}` | `network()` returning `'mainnet' / 'testnet'` |
+| Event `on` / `off` helpers | `client.on(...)` returns an unsubscribe function |
+| `toZats`, `fromZats`, address/ZIP-321 parsing, URI generation and QR helpers | Not exported; migrate these explicitly to application utilities or a suitable dedicated library |
+| Balance/address/status convenience methods and `isConnected()` | No corresponding client convenience methods; use granted provider capabilities and connection results, not inferred support |
+| Viewing-key methods and `view_keys` permission | Removed; viewing-key export remains a local wallet action |
+| Shielding, Swap / explorer HTTP clients | Not supplied by this SDK; do not assume general wallet or API access |
+
+Do not convert decimal ZEC through JavaScript floating-point arithmetic. For
+example, `0.001 ZEC` is `100000n` zatoshis. Connecting does not guarantee every
+requested permission was approved: check `connected` and `approvedPermissions`
+before enabling Pay. Treat account arrays as potentially empty.
+
 
 Use `discoverZucchiniProvider()` and `createZucchiniClient(provider)` from `/zcash`.
 Call `connect({permissions: [...]})` from Connect and `requestPayment(uri)` or
@@ -43,7 +65,6 @@ scripts, imports every export, checks SSR and Connect/Pay separation, and compil
 a TypeScript consumer. The experimental protocol and both licenses are bundled;
 consumers do not need the development override's local tarball path.
 
-Publish the verified tarball with `npm publish <tarball> --access public --tag next`.
-Keep the tarball integrity and source revision in the release record. Do not move
-`latest` without a separately reviewed stable release and migration decision.
+Publish the verified tarball with `npm publish <tarball> --access public --tag latest`.
+Keep the tarball integrity and source revision in the release record. Verify the published version, integrity and `latest` tag after publication.
 No CI job stores npm credentials or publishes on an ordinary push.

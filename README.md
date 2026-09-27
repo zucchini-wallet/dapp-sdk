@@ -5,7 +5,7 @@ Framework-independent TypeScript SDK for integrating applications with Zucchini 
 ## Install
 
 ```sh
-npm install @zucchinifi/dapp-sdk@next
+npm install @zucchinifi/dapp-sdk@0.2.0
 ```
 
 See [compatibility and migration](docs/distribution.md) before replacing 0.1.x.
@@ -80,11 +80,12 @@ incoming viewing key locally and configure the receipt scanner. No separate wall
 is required. The browser SDK never imports viewing keys or seeds.
 
 Use `/zcash` for the small browser connection client, `/merchant` for signed
-checkout, and `/merchant/server` only in backend code. The default entry retains
-EVM/Solana exports for existing consumers. The protocol package is bundled in the
-alpha tarball with its licenses so installation does not require our private file
+checkout, and `/merchant/server` only in backend code. The default entry re-exports
+Zcash, EVM and Solana helpers; it does not preserve the legacy 0.1.x API. The protocol package is bundled in the
+release tarball with its licenses so installation does not require our private file
 paths; its dependency version is explicit. Development overrides are not a runtime
-requirement. Use the `next` npm tag for the new API; `latest` remains the legacy 0.1.x line.
+requirement. Version 0.2.0 is the stable API release intended for `latest`. Signed merchant
+entry points remain explicitly experimental and do not enable production wallet support.
 
 ### Ordinary website payments (Wallet 0.5.2)
 
