@@ -71,7 +71,7 @@ Licensed under either Apache-2.0 or MIT, at your option.
 
 ### Reference wallet checkout (testnet)
 
-[Wallet checkout example](https://github.com/zucchini-wallet/dapp-sdk/tree/staging/examples/wallet-checkout) connects the browser SDK to a backend-owned 0.001 test-ZEC order, persists invoice issuance, and reports submission without claiming receipt confirmation. It uses public test keys and requires an operator-owned testnet receiver and HTTPS hosting matching the testing registry. It is not a production merchant service.
+[Wallet checkout example](https://github.com/zucchini-wallet/dapp-sdk/tree/main/examples/wallet-checkout) connects the browser SDK to a backend-owned 0.001 test-ZEC order, persists invoice issuance, and reports submission without claiming receipt confirmation. It uses public test keys and requires an operator-owned testnet receiver and HTTPS hosting matching the testing registry. It is not a production merchant service.
 
 ## Existing-wallet merchant setup
 
@@ -94,3 +94,15 @@ approval. `requestPayment(uri)` sends a supported single-recipient ZIP-321 URI t
 the wallet for parsing and review; merchant registration is not required.
 See [website payment integration](docs/website-payments.md) for supported fields,
 error handling and the distinction between submission and receipt confirmation.
+
+## Runnable examples and scanner SDK
+
+- [Basic checkout](https://github.com/zucchini-wallet/dapp-sdk/tree/main/examples/basic-checkout): ordinary Connect then ZIP-321 Pay,
+  testnet only, no merchant registration.
+- [Backend scan](https://github.com/zucchini-wallet/dapp-sdk/tree/main/examples/receipt-backend): scan locally with a private viewing-key file.
+- [Signed checkout](https://github.com/zucchini-wallet/dapp-sdk/tree/main/examples/wallet-checkout): existing experimental end-to-end reference.
+- [Zcash scanner SDK](https://github.com/zucchini-wallet/dapp-sdk/tree/main/receipt-scanner/sdk): separately packaged Node API for the
+  Rust scanner; no native binaries or viewing keys in the browser package.
+
+The scanner SDK is distributed separately as `@zucchinifi/zcash-scanner`. It is stateless;
+continuous checkpoint/reorg/fulfillment operation remains an application responsibility.

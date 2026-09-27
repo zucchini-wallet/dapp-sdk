@@ -1,0 +1,1 @@
+{"name":"zucchini-basic-checkout-example","private":true,"type":"module","scripts":{"dev":"vite --host 127.0.0.1","build":"vite build"},"dependencies":{"@zucchinifi/dapp-sdk":"file:../.."},"devDependencies":{"vite":"6.4.3"}}

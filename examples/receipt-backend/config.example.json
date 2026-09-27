@@ -1,0 +1,8 @@
+{
+ "binary": "/absolute/path/zucchini-merchant-receipt-scanner",
+ "viewingKeyFile": "/absolute/private/merchant.viewing-key",
+ "endpoint": "https://testnet.zec.rocks:443",
+ "network": "testnet",
+ "from": 4000000,
+ "recipients": ["REPLACE_WITH_YOUR_TESTNET_UNIFIED_ADDRESS"]
+}

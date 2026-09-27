@@ -25,3 +25,16 @@ jobs:
       - run: pnpm check
       - run: pnpm test
       - run: pnpm verify:package
+
+      - run: node --test receipt-scanner/sdk/test/*.test.mjs
+      - run: npm ci && npm run build
+        working-directory: examples/basic-checkout
+
+      - run: node scripts/verify-scanner-package.mjs
+
+  scanner-native:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - run: cargo test --locked --manifest-path receipt-scanner/Cargo.toml

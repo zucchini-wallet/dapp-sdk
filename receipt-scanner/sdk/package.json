@@ -1,0 +1,13 @@
+{
+  "name": "@zucchinifi/zcash-scanner",
+  "version": "0.1.0",
+  "description": "Server-side Node SDK for the Zucchini incoming-only Zcash receipt scanner",
+  "type": "module",
+  "exports": {".": {"types": "./src/index.d.ts", "import": "./src/index.js"}},
+  "files": ["src", "README.md", "LICENSE-MIT", "LICENSE-APACHE"],
+  "engines": {"node": ">=22.19"},
+  "scripts": {"test": "node --test test/*.test.mjs", "prepublishOnly": "npm test"},
+  "license": "MIT OR Apache-2.0",
+  "repository": {"type": "git", "url": "git+https://github.com/zucchini-wallet/dapp-sdk.git", "directory": "receipt-scanner/sdk"},
+  "publishConfig": {"access": "public"}
+}
