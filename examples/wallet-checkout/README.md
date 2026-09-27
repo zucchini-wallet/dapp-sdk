@@ -8,7 +8,7 @@ This reference connects the browser SDK to a server-owned order and the testing 
 2. Set `MERCHANT_TEST_RECEIVER` to a shielded address **copied from your own testnet wallet**. The server pins this exact configured recipient; it does not implement general Zcash address decoding. The paying extension fully validates it using wallet-core before approval.
 3. Run `node examples/wallet-checkout/server.mjs`. It listens only on `127.0.0.1:4319`.
 4. Proxy `/merchant-test/` on **https://zucchinifi.xyz** to this server, preserving the path and cookie headers. The HTTPS origin must match the testing registry exactly. Do not weaken the registry/origin check to make localhost work. Hosting/proxy setup is not included or automatically deployed.
-5. Reload the testing extension and visit `https://zucchinifi.xyz/merchant-test/`. Select testnet in the wallet and click **Connect wallet**. The app obtains the challenge, requests the signed invoice, and opens wallet approval. No console/CLI invoice copying is needed.
+5. Reload the testing extension and visit `https://zucchinifi.xyz/merchant-test/`. Select testnet in the wallet and click **Connect wallet**. Then use the separate payment action to obtain a challenge, request the signed invoice, and open wallet approval. No console/CLI invoice copying is needed.
 
 The fixed price is 0.001 test ZEC. The browser cannot submit an amount, recipient, memo or network to the signer. Test keys are public and must never be used outside this test environment. The extension's embedded registry expires after 24 hours; rebuild it if expired.
 

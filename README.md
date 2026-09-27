@@ -106,3 +106,9 @@ error handling and the distinction between submission and receipt confirmation.
 
 The scanner SDK is distributed separately as `@zucchinifi/zcash-scanner`. It is stateless;
 continuous checkpoint/reorg/fulfillment operation remains an application responsibility.
+
+## Contributing and security
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) and [SECURITY.md](SECURITY.md).
+Original code is dual-licensed under MIT OR Apache-2.0, at your option.
+Third-party components retain their own licenses and notices.
