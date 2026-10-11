@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0-direct-payment.1 — unpublished integration candidate
+
+- Typed `getAddresses()` after explicit `view_addresses` consent; no automatic
+  connection, permission escalation or balance read.
+- Optional integer Unix-second `requestPayment(uri, { expiresAt })` approval
+  cutoff. Updated wallets shorten their normal review window and check expiry
+  before authorizing signing. Older wallets reject it without an automatic
+  retry or fallback; legacy payment calls remain unchanged.
+
 ## 0.2.0 — 2026-09-27
 
 Stable release of the new SDK API. This is a breaking update from 0.1.7;

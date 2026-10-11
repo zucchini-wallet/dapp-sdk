@@ -1,6 +1,6 @@
 {
   "name": "@zucchinifi/dapp-sdk",
-  "version": "0.2.0",
+  "version": "0.3.0-direct-payment.1",
   "description": "Typed Zcash, EVM, and Solana integration SDK for Zucchini Wallet",
   "type": "module",
   "files": [
